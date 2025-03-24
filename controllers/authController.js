@@ -24,13 +24,14 @@ const registerUser = async (req,res)=>{
 
         res.status(201).json({message:"User registered successfully",
         user});
-        });
+        
 
     } catch (error) {
         console.error(error);
         res.status(500).json({message:"Server error"});
+        }
 
-    }
-module exports = {
+}
+module.exports = {
     registerUser
-};
+}
