@@ -1,15 +1,16 @@
+require('dotenv').config();
+
 const express = require('express');
-const { resolve } = require('path');
-
 const app = express();
-const port = 3010;
+const connectDB = require('./config/db');
 
-app.use(express.static('static'));
+connectDB();
 
-app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, 'pages/index.html'));
-});
+const authRoutes = require('./routes/authRoutes');
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
